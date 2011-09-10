@@ -1,12 +1,12 @@
-<?php if($this->input->get('updated') !== false) { ?>
-<div class="message success">
-	Update successful.
-</div>
+<?php if ($this->input->get('updated') !== false) { ?>
+	<div class="message success">
+		Update successful.
+	</div>
 <?php } ?>
 
 <h2>User Details</h2>
 
-<form action="<?php echo(base_url("admin/users/update")); ?>/" method="POST">
+<form action="<?php echo(base_url("admin/users/update_user")); ?>/" method="POST">
 
 	<table>
 		<tr>
@@ -30,8 +30,7 @@
 			<td><?php echo($user->creation_time) ?></span></td>
 			<td>
 				<input type="hidden" name="id" value="<?php echo($user->id) ?>" />
-				<input type="Submit" value="Save Changes" /> 
-				<input type="Submit" value="Cancel" />
+				<input type="Submit" value="Save Changes" />
 			</td>
 		</tr>
 
@@ -57,20 +56,23 @@
 
 		<?php foreach ($exams as $exam): ?>
 
-			<tr>
-				<td><?php echo($exam->id) ?></td>
-				<td><?php echo($exam->exam_id) ?></td>
-				<td><?php echo($exam->status) ?></td>
-				<td><input type="text" value="<?php echo($exam->current_question) ?>" /></td>
-				<td><input type="text" value="<?php echo($exam->creation_time) ?>" /></td>
-				<td><input type="text" value="<?php echo($exam->expiration_time) ?>" /></td>
-				<td><?php echo($exam->creation_time) ?></td>
-				<td>
-					<input type="Submit" value="Save Changes" /> 
-					<input type="Submit" value="Cancel" />
-				</td>
-			</tr>
-
+			<form action="<?php echo(base_url("admin/users/update_purchased_exam")); ?>/" method="POST">
+				<tr>
+					<td><?php echo($exam->id) ?></td>
+					<td><?php echo($exam->exam_id) ?></td>
+					<td><?php echo($exam->status) ?></td>
+					<td><input type="text" name="current_question" value="<?php echo($exam->current_question) ?>" /></td>
+					<td><?php echo($exam->creation_time) ?></td>
+					<td><input type="text" name="expiration_date" value="<?php echo($exam->expiration_time) ?>" /></td>
+					<td>
+						<input type="hidden" name="user_id" value="<?php echo($user->id) ?>" />
+						<input type="hidden" name="id" value="<?php echo($exam->id) ?>" />
+						<input type="hidden" name="exam_id" value="<?php echo($exam->exam_id) ?>" />
+						<input type="Submit" value="Save Changes" />
+					</td>
+				</tr>
+			</form>
+		
 		<?php endforeach; ?>
 
 	</table>

@@ -51,7 +51,7 @@
 			}
 
 			input {
-				width: 11em;
+				width: 10.5em;
 			}
 
 			td, th {

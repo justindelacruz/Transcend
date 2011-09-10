@@ -18,20 +18,24 @@ class User_model extends CI_Model {
 		$query = $this->db->get('users');
 		return $query->result();
 	}
-	
+
 	function get_user($id) {
 		$query = $this->db->get_where('users', array('id' => $id));
 		return $query->result();
 	}
-	
+
 	function get_exams($id) {
-		$query = $this->db->get_where('users u, purchased_exams pe', array('pe.user_id' => $id));
-		return $query->result();
+		$query = $this->db->get('purchased_exams pe');
+		$this->db->where('pe.user_id = u.id');
+		$this->db->where("pe.user_id", "1");
+		$result = $query->result();
+		return $result;
 	}
 
 	function update_user($id, $data) {
 		$this->db->where('id', $id);
-		$this->db->update('users', $data);
+		$result = $this->db->update('users', $data);
+		return $result;
 	}
 
 }
