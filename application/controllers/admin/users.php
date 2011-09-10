@@ -1,11 +1,12 @@
 <?php
 
-class Users extends CI_Controller {
+class Purchased_exams extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
 		
 		$this->load->model('User_model', '', true);
+		$this->load->helper('url');
 		/*
 		 * TODO: Verify admin user
 		 */
@@ -40,8 +41,17 @@ class Users extends CI_Controller {
 		
 	}
 	
-	public function do_edit() {
+	public function update() {
+		$id = $this->input->post('id');
+		$data['first_name'] = $this->input->post('first_name');
+		$data['last_name'] = $this->input->post('last_name');
+		$data['email'] = $this->input->post('email');
+		$data['company'] = $this->input->post('company');
+		$data['title'] = $this->input->post('title');
 		
+		$exams = $this->User_model->update_user($id, $data);
+		
+		redirect("/admin/users/edit/{$id}?updated", 'location');
 	}
 
 	public function comments() {

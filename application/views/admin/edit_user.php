@@ -1,6 +1,12 @@
+<?php if($this->input->get('updated') !== false) { ?>
+<div class="message success">
+	Update successful.
+</div>
+<?php } ?>
+
 <h2>User Details</h2>
 
-<form action="./update/<?php echo($user->id) ?>" action="POST">
+<form action="<?php echo(base_url("admin/users/update")); ?>/" method="POST">
 
 	<table>
 		<tr>
@@ -16,13 +22,14 @@
 
 		<tr>
 			<td><?php echo($user->id) ?></td>
-			<td><?php echo($user->first_name) ?></td>
-			<td><?php echo($user->last_name) ?></td>
-			<td><input type="email" value="<?php echo($user->email) ?>" /></td>
-			<td><input type="text" value="<?php echo($user->company) ?>" /></td>
-			<td><input type="text" value="<?php echo($user->title) ?>" /></td>
-			<td class="nowrap"><?php echo($user->creation_time) ?></span></td>
+			<td><input type="text" name="first_name" value="<?php echo($user->first_name) ?>" /></td>
+			<td><input type="text" name="last_name" value="<?php echo($user->last_name) ?>" /></td>
+			<td><input type="email" name="email" value="<?php echo($user->email) ?>" /></td>
+			<td><input type="text" name="company" value="<?php echo($user->company) ?>" /></td>
+			<td><input type="text" name="title" value="<?php echo($user->title) ?>" /></td>
+			<td><?php echo($user->creation_time) ?></span></td>
 			<td>
+				<input type="hidden" name="id" value="<?php echo($user->id) ?>" />
 				<input type="Submit" value="Save Changes" /> 
 				<input type="Submit" value="Cancel" />
 			</td>
