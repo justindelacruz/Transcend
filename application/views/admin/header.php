@@ -50,9 +50,11 @@
 				padding: 14px 15px 10px 0px;
 			}
 
+			/*
 			input {
 				width: 10.5em;
 			}
+			*/
 
 			td, th {
 				padding: 3px 8px 3px 8px;

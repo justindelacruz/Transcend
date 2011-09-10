@@ -35,8 +35,8 @@ class Exam_model extends CI_Model {
 	 * Categories
 	 * 
 	 */
-	function get_categories($id) {
-		$query = $this->db->get_where('categories', array('exam_id' => $id));
+	function get_categories($exam_id) {
+		$query = $this->db->get_where('categories', array('exam_id' => $exam_id));
 		return $query->result();
 	}
 
@@ -58,6 +58,15 @@ class Exam_model extends CI_Model {
 		return $result;
 	}
 
+	/*
+	 * 
+	 * Questions 
+	 * 
+	 */
+	function get_questions($exam_id) {
+		$query = $this->db->get_where('questions', array('exam_id' => $exam_id));
+		return $query->result();
+	}
 }
 
 /* End of file exam_model.php */

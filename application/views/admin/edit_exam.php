@@ -32,14 +32,21 @@
 
 <h2>Categories</h2>
 
-<?php if (count($categories) > 0) { ?>
+<?php if (count($categories) == 0) { ?>
 
-	<table>
-		<tr>
-			<th>Name</th>
-			<th>Actions</th>
-		</tr>
+	<p>
+		This exam has no categories.
+	</p>
 
+<?php }  ?>
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Actions</th>
+	</tr>
+
+	<?php if (count($categories) > 0) { ?>
 
 		<?php foreach ($categories as $category): ?>
 
@@ -57,30 +64,25 @@
 
 		<?php endforeach; ?>
 
-		<form action="<?php echo(base_url("admin/exams/update_category")); ?>/" method="POST">
-			<tr>
-				<td><input type="text" name="name" value="" placeholder="New Category" /></td>
-				<td>
-					<input type="hidden" name="exam_id" value="<?php echo($exam->id) ?>" />
-					<input type="Submit" name="create" value="Add" />
-				</td>
-			</tr>
-		</form>
+	<?php } ?>
 
-	</table>
 
-<?php } // end if
-else { ?>
 
-	<p>
-		This exam has no categories.
-	</p>
+	<form action="<?php echo(base_url("admin/exams/update_category")); ?>/" method="POST">
+		<tr>
+			<td><input type="text" name="name" value="" placeholder="New Category" /></td>
+			<td>
+				<input type="hidden" name="exam_id" value="<?php echo($exam->id) ?>" />
+				<input type="Submit" name="create" value="Add" />
+			</td>
+		</tr>
+	</form>
 
-<?php } // end else ?>
-	
-	
-	
-	<h2>questions</h2>
+</table>
+
+
+
+<h2>Questions</h2>
 
 <?php if (count($questions) > 0) { ?>
 
@@ -126,7 +128,7 @@ else { ?>
 		This exam has no questions.
 	</p>
 
-<?php } // end else ?>
+<?php } // end else  ?>
 
 
 

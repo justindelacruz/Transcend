@@ -26,14 +26,16 @@ class Exams extends CI_Controller {
 
 	public function edit($id) {
 		$exam = $this->Exam_model->get_exam($id);
-		$exam = (isset($exam[0])) ? $exam[0] : null;
-		
 		$categories = $this->Exam_model->get_categories($id);
+		$questions = $this->Exam_model->get_questions($id);
+		
+		$exam = (isset($exam[0])) ? $exam[0] : null;
 
 		// Views
 		$header_data['title'] = "Exam Details";
 		$content_data['exam'] = $exam;
 		$content_data['categories'] = $categories;
+		$content_data['questions'] = $questions;
 
 		$this->load->view('admin/header', $header_data);
 		$this->load->view('admin/edit_exam', $content_data);
@@ -79,6 +81,17 @@ class Exams extends CI_Controller {
 		} else {
 			redirect("/admin/exams/edit/{$exam_id}?error", 'location');
 		}
+	}
+	
+	public function build() {
+		
+		// Views
+		$header_data['title'] = "Build Exam";
+		$content_data['exams'] = array();
+		
+		$this->load->view('admin/header', $header_data);
+		$this->load->view('admin/exam_builder');
+		$this->load->view('admin/footer');
 	}
 }
 
