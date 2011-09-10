@@ -65,12 +65,12 @@
 
 			.message {
 				padding: 1.1em;
-				color: #FFF;
 				font-size: 1.4em;
 				border-radius: 3px;
 			}
-			
+
 			.message.success {
+				color: #FFF;
 				background-color: #78b433;
 				/* Generated at http://gradients.glrzad.com/ */
 				background-image: -webkit-gradient(
@@ -85,6 +85,11 @@
 					rgb(76,126,18) 0%,
 					rgb(120,180,51) 77%
 					);
+			}
+
+			.message.error {
+				color: #111;
+				border: 1px solid red;
 			}
 
 			.back {
@@ -134,4 +139,13 @@
 
 			<div id="body">
 
-
+				<?php if ($this->input->get('updated') !== false) { ?>
+					<div class="message success">
+						Update successful.
+					</div>
+				<?php }
+				if ($this->input->get('error') !== false) { ?>
+					<div class="message error">
+						There was a problem with your input. Please check and try again.
+					</div>
+				<?php } ?>

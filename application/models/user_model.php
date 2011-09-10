@@ -25,9 +25,9 @@ class User_model extends CI_Model {
 	}
 
 	function get_exams($id) {
-		$query = $this->db->get('purchased_exams pe');
+		$query = $this->db->get('purchased_exams pe, users u');
 		$this->db->where('pe.user_id = u.id');
-		$this->db->where("pe.user_id", "1");
+		$this->db->where('u.id = 3');
 		$result = $query->result();
 		return $result;
 	}

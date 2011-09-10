@@ -1,9 +1,3 @@
-<?php if ($this->input->get('updated') !== false) { ?>
-	<div class="message success">
-		Update successful.
-	</div>
-<?php } ?>
-
 <h2>User Details</h2>
 
 <form action="<?php echo(base_url("admin/users/update_user")); ?>/" method="POST">
@@ -27,10 +21,10 @@
 			<td><input type="email" name="email" value="<?php echo($user->email) ?>" /></td>
 			<td><input type="text" name="company" value="<?php echo($user->company) ?>" /></td>
 			<td><input type="text" name="title" value="<?php echo($user->title) ?>" /></td>
-			<td><?php echo($user->creation_time) ?></span></td>
+			<td><?php echo($user->creation_time) ?></td>
 			<td>
 				<input type="hidden" name="id" value="<?php echo($user->id) ?>" />
-				<input type="Submit" value="Save Changes" />
+				<input type="Submit" value="Save" />
 			</td>
 		</tr>
 
@@ -46,6 +40,7 @@
 		<tr>
 			<th>Purchase ID</th>
 			<th>Exam ID</th>
+			<th>Paid</th>
 			<th>Status</th>
 			<th>Last Question Answered</th>
 			<th>Purchase Time</th>
@@ -60,6 +55,7 @@
 				<tr>
 					<td><?php echo($exam->id) ?></td>
 					<td><?php echo($exam->exam_id) ?></td>
+					<td><?php echo($exam->price) ?></td>
 					<td><?php echo($exam->status) ?></td>
 					<td><input type="text" name="current_question" value="<?php echo($exam->current_question) ?>" /></td>
 					<td><?php echo($exam->creation_time) ?></td>
@@ -68,7 +64,7 @@
 						<input type="hidden" name="user_id" value="<?php echo($user->id) ?>" />
 						<input type="hidden" name="id" value="<?php echo($exam->id) ?>" />
 						<input type="hidden" name="exam_id" value="<?php echo($exam->exam_id) ?>" />
-						<input type="Submit" value="Save Changes" />
+						<input type="Submit" value="Save" />
 					</td>
 				</tr>
 			</form>

@@ -4,7 +4,7 @@
  * Copyright Justin Dela Cruz, for Transcend.net. All Rights Reserved.
  */
 
-class Purchased_exams_model extends CI_Model {
+class Purchased_exam_model extends CI_Model {
 
 	function __construct() {
 		parent::__construct();
@@ -33,4 +33,4 @@ class Purchased_exams_model extends CI_Model {
 
 }
 
-/* End of file purchased_exams.php */
+/* End of file purchased_exam_model.php */

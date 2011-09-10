@@ -6,7 +6,7 @@ class Users extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('User_model', '', true);
-		$this->load->model('Purchased_exams_model', '', true);
+		$this->load->model('Purchased_exam_model', '', true);
 		$this->load->helper('url');
 		/*
 		 * TODO: Verify admin user
@@ -27,9 +27,9 @@ class Users extends CI_Controller {
 
 	public function edit($id) {
 		$user = $this->User_model->get_user($id);
-		$exams = $this->User_model->get_exams($id);
-
 		$user = (isset($user[0])) ? $user[0] : null;
+
+		$exams = $this->User_model->get_exams($id);
 
 		// Views
 		$header_data['title'] = "User Details";
