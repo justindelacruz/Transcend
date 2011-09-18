@@ -42,10 +42,10 @@
 			<th>Exam ID</th>
 			<th>Paid</th>
 			<th>Status</th>
-			<th>Last Question Answered</th>
+			<!-- <th>Last Question Answered</th> -->
 			<th>Purchase Time</th>
 			<th>Expiration Time</th>
-			<th>Actions</th>
+			<!-- <th>Actions</th> -->
 		</tr>
 
 
@@ -57,14 +57,14 @@
 					<td><?php echo($exam->exam_id) ?></td>
 					<td><?php echo($exam->price) ?></td>
 					<td><?php echo($exam->status) ?></td>
-					<td><input type="text" name="current_question" value="<?php echo($exam->current_question) ?>" /></td>
+					<!-- <td><?php echo($exam->subcategory_id) ?></td> -->
 					<td><?php echo($exam->creation_time) ?></td>
-					<td><input type="text" name="expiration_date" value="<?php echo($exam->expiration_time) ?>" /></td>
+					<td><?php echo($exam->expiration_time) ?></td>
 					<td>
 						<input type="hidden" name="user_id" value="<?php echo($user->id) ?>" />
 						<input type="hidden" name="id" value="<?php echo($exam->id) ?>" />
 						<input type="hidden" name="exam_id" value="<?php echo($exam->exam_id) ?>" />
-						<input type="Submit" value="Save" />
+						<!-- <input type="Submit" value="Save" /> -->
 					</td>
 				</tr>
 			</form>

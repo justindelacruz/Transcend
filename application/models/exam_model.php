@@ -20,12 +20,12 @@ class Exam_model extends CI_Model {
 	}
 
 	function get_exam($exam_id) {
-		$query = $this->db->get_where('exams', array('exam_id' => $id));
+		$query = $this->db->get_where('exams', array('exam_id' => $exam_id));
 		return $query->result();
 	}
 
 	function update_exam($exam_id, $data) {
-		$this->db->where('exam_id', $id);
+		$this->db->where('exam_id', $exam_id);
 		$result = $this->db->update('exams', $data);
 		return $result;
 	}
@@ -38,6 +38,11 @@ class Exam_model extends CI_Model {
 
 	function get_categories($exam_id) {
 		$query = $this->db->get_where('categories', array('exam_id' => $exam_id));
+		return $query->result();
+	}
+
+	function get_category($exam_id, $category_id) {
+		$query = $this->db->get_where('categories', array('exam_id' => $exam_id, 'category_id' => $category_id));
 		return $query->result();
 	}
 
@@ -71,6 +76,16 @@ class Exam_model extends CI_Model {
 		return $query->result();
 	}
 
+	function get_subcategory($exam_id, $category_id, $subcategory_id) {
+		$query = $this->db->get_where('subcategories', array(
+			'exam_id' => $exam_id,
+			'category_id' => $category_id,
+			'subcategory_id' => $subcategory_id
+				)
+		);
+		return $query->result();
+	}
+
 	function delete_subcategories($exam_id, $category_id) {
 		$this->db->where('exam_id', $exam_id);
 		$this->db->where('category_id', $category_id);
@@ -87,9 +102,47 @@ class Exam_model extends CI_Model {
 	 */
 
 	function get_questions($exam_id, $category_id) {
+
+		$this->db->where(array(
+			'exam_id' => $exam_id,
+			'category_id' => $category_id
+				)
+		);
+		$query = $this->db->get('questions');
+
+		$parsed = array();
+		foreach ($query->result() as $question) {
+			$parsed[$question->question_id] = $question;
+		}
+
+		return $parsed;
+	}
+
+	function get_questions_subset($exam_id, $category_id, $subcategory_id, $limit) {
+		$this->db->where(array(
+			'exam_id' => $exam_id,
+			'category_id' => $category_id,
+			'subcategory_id' => $subcategory_id
+				)
+		);
+		$this->db->limit($limit);
+		$this->db->order_by("id", "random"); 
+		$query = $this->db->get('questions');
+
+		$parsed = array();
+		foreach ($query->result() as $question) {
+			$parsed[$question->question_id] = $question;
+		}
+
+		return $parsed;
+	}
+
+	function get_question($exam_id, $category_id, $question_id) {
 		$query = $this->db->get_where('questions', array(
 			'exam_id' => $exam_id,
-			'category_id' => $category_id)
+			'category_id' => $category_id,
+			'question_id' => $question_id
+				)
 		);
 		return $query->result();
 	}
@@ -101,6 +154,7 @@ class Exam_model extends CI_Model {
 	/*
 	 * Answers
 	 */
+
 	function get_answers($exam_id, $category_id) {
 		$query = $this->db->get_where('answers', array(
 			'exam_id' => $exam_id,
@@ -108,7 +162,24 @@ class Exam_model extends CI_Model {
 		);
 		return $query->result();
 	}
-	
+
+	function get_subcategory_answers($exam_id, $category_id, $subcategory_id, $question_ids) {
+		$this->db->where(array(
+			'exam_id' => $exam_id,
+			'category_id' => $category_id,
+			'subcategory_id' => $subcategory_id
+				)
+		);
+		$this->db->where_in('question_id', $question_ids);
+		$query = $this->db->get('answers');
+
+		$parsed = array();
+		foreach ($query->result() as $answer) {
+			$parsed[$answer->question_id][$answer->answer_id] = $answer;
+		}
+		return $parsed;
+	}
+
 	function add_answers($data) {
 		$this->db->insert_batch('answers', $data); /* cascade-deletes questions and answers */
 	}

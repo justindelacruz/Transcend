@@ -1,10 +1,18 @@
-<pre>
+<!--<pre>
 <?php print_r($subcategories); ?>
 <?php print_r($questions); ?>
 <?php print_r($answers); ?>
-</pre>
+</pre>-->
 <link type="text/css" href="<?php echo(base_url("assets/css/exam_builder.css")) ?>" rel="Stylesheet" />	
-<h2>Exam Builder</h2>
+<h2>Exam Builder (Demo)</h2>
+
+<p>
+	The Exam Builder provides a simple and intuitive way to manage exam questions, answers, categories, and topics (subcategories).
+</p>
+
+<p>
+	In this demo, you can add, rearrange, and edit questions and subcategories, as well as save your work. In the future, you will be able to manage other categories and add images.
+</p>
 
 <section id="builder_container">
 
@@ -18,6 +26,7 @@
 
 			<select id="categories">
 				<option value="" default="default">Change Category</option>
+				<option>In the future, you will be able to create and manage multiple categories. This demo only allows one category.</option>
 				<option value="1">Part 1</option>
 				<option value="2">Part 2</option>
 				<option value="3">Part 3</option>
@@ -51,7 +60,7 @@
 					<button class="trash_button">Delete</button>
 				</div>
 				<input class="name" type="input" placeholder="Untitled Subcategory"/><br />
-				<textarea class="description" "rows="4" cols="50" placeholder="You can include any text or info that will help people fill this out."></textarea>
+				<textarea class="description" rows="4" cols="50" placeholder="You can include any text or info that will help people fill this out."></textarea>
 			</section>
 			
 			<section class="module question">

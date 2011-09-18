@@ -134,7 +134,7 @@
 
 		<div id="container">
 
-			<div id="logo"><a href="http://www.transcend.net"><img src="<?php echo(base_url("assets/logo.png")) ?>" /></a></div>
+			<div id="logo"><a href="<?php echo(base_url("admin/main")); ?>"><img src="<?php echo(base_url("assets/logo.png")) ?>" /></a></div>
 
 			<h1>
 				Translator Exam Control Panel

@@ -14,11 +14,11 @@
 		<?php foreach ($exams as $exam): ?>
 
 			<tr>
-				<td><?php echo($exam->id) ?></td>
+				<td><?php echo($exam->exam_id) ?></td>
 				<td><?php echo($exam->name) ?></td>
 				<td>$<?php echo($exam->price) ?></td>
 				<td><?php echo($exam->creation_time) ?></td>
-				<td><a href="<?php echo(base_url("admin/exams/edit/{$exam->id}")); ?>">View Exam / Change Info</a></td>
+				<td><a href="<?php echo(base_url("admin/exams/edit/{$exam->exam_id}")); ?>">View Exam / Change Info</a></td>
 			</tr>
 
 		<?php endforeach; ?>

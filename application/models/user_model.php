@@ -13,7 +13,7 @@ class User_model extends CI_Model {
 		parent::__construct();
 	}
 
-	// Gets all info
+// Gets all info
 	function get_all_users() {
 		$query = $this->db->get('users');
 		return $query->result();
@@ -24,11 +24,38 @@ class User_model extends CI_Model {
 		return $query->result();
 	}
 
-	function get_exams($id) {
-		$query = $this->db->get('purchased_exams pe, users u');
-		$this->db->where('pe.user_id = u.id');
-		$this->db->where('u.id = 3');
+	function get_exams($user_id) {
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get('purchased_exams pe');
+		
 		$result = $query->result();
+		return $result;
+	}
+
+	function get_user_id($email) {
+		$result = $this->db->get_where('users', array('email' => $email));
+		if ($result->num_rows() == 0) {
+			return false;
+		}
+
+		return $result->row()->id;
+	}
+
+	/*
+	 * @Returns:	mysql result	email doesn't exist
+	 * 				null			email already exists
+	 */
+
+	function add_user($data) {
+
+		$userExists = $this->get_user_id($data['email']);
+
+		$result = null;
+
+		if (!$userExists) {
+			$result = $this->db->insert('users', $data);
+		}
+
 		return $result;
 	}
 
@@ -37,7 +64,6 @@ class User_model extends CI_Model {
 		$result = $this->db->update('users', $data);
 		return $result;
 	}
-
 }
 
 /* End of file user_model.php */

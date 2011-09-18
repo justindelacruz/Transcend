@@ -62,10 +62,10 @@ class Users extends CI_Controller {
 		$purchase_id = $this->input->post('id');
 		$data['user_id'] = $this->input->post('user_id');
 		$data['exam_id'] = $this->input->post('exam_id');
-		$data['current_question'] = $this->input->post('current_question');
+		//$data['current_question'] = $this->input->post('current_question');
 		$data['expiration_time'] = $this->input->post('expiration_time');
 
-		$result = $this->Purchased_exams_model->update_purchased_exam($purchase_id, $data);
+		$result = $this->Purchased_exam_model->update_purchased_exam($purchase_id, $data);
 
 		if ($result === true) {
 			redirect("/admin/users/edit/{$data['user_id']}?updated", 'location');

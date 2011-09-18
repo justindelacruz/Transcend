@@ -26,16 +26,16 @@ class Exams extends CI_Controller {
 
 	public function edit($id) {
 		$exam = $this->Exam_model->get_exam($id);
-		$categories = $this->Exam_model->get_categories($id);
-		$questions = $this->Exam_model->get_questions($id);
+		//$categories = $this->Exam_model->get_categories($id);
+		//$questions = $this->Exam_model->get_questions($id);
 
 		$exam = (isset($exam[0])) ? $exam[0] : null;
 
 		// Views
 		$header_data['title'] = "Exam Details";
 		$content_data['exam'] = $exam;
-		$content_data['categories'] = $categories;
-		$content_data['questions'] = $questions;
+		// $content_data['categories'] = $categories;
+		// $content_data['questions'] = $questions;
 
 		$this->load->view('admin/header', $header_data);
 		$this->load->view('admin/edit_exam', $content_data);
@@ -43,23 +43,23 @@ class Exams extends CI_Controller {
 	}
 
 	public function update_exam() {
-		$id = $this->input->post('id');
+		$exam_id = $this->input->post('exam_id');
 		$data['name'] = $this->input->post('name');
 		$data['price'] = $this->input->post('price');
 		$data['modification_time'] = date('Y-m-d H-i-s');
 
 		$result = null;
-		if (is_numeric($data['price']) && $data['price'] < "0.01" && $data['price'] > "999.99") {
-			$result = $this->Exam_model->update_exam($id, $data);
+		if (is_numeric($data['price']) && $data['price'] > "0.01" && $data['price'] <= "999.99") {
+			$result = $this->Exam_model->update_exam($exam_id, $data);
 		}
-
+		
 		if ($result === true) {
-			redirect("/admin/exams/edit/{$id}?updated", 'location');
+			redirect("/admin/exams/edit/{$exam_id}?updated", 'location');
 		} else {
-			redirect("/admin/exams/edit/{$id}?error", 'location');
+			redirect("/admin/exams/edit/{$exam_id}?error", 'location');
 		}
 	}
-
+/*
 	public function update_category() {
 		$id = $this->input->post('id');
 		$exam_id = $this->input->post('exam_id');
@@ -80,7 +80,7 @@ class Exams extends CI_Controller {
 			redirect("/admin/exams/edit/{$exam_id}?error", 'location');
 		}
 	}
-
+*/
 	public function builder() {
 
 		$exam_id = 1;
@@ -103,6 +103,11 @@ class Exams extends CI_Controller {
 
 	public function build() {
 		$data = $this->input->post('data');
+		
+		if(!$data) {
+			redirect("/admin/exams/builder?error", 'location');
+		}
+		
 		$data = json_decode($data, true);
 
 		$subcategories = array();

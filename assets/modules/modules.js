@@ -38,6 +38,14 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	$("#add_category_button").click(function() {
+		alert("Sorry, this demo only allows one category. In the future, you will be able to create and manage multiple categories.");
+	});
+	
+	$("#categories").select(function() {
+	});
+	
+	
 	$("#add_subcategory_button").click(function() {
 		if(activeModule === null) {
 			$("#module_templates > .subcategory").clone().appendTo(MODULE_CONTAINER);	
@@ -75,6 +83,7 @@ $(document).ready(function() {
 		
 		activeModule = $(this);
 	});
+	
 	
 	/*
 	 * Subcategory
