@@ -5,6 +5,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title><?php echo $title ?> | Control Panel | Transcend Online Translator Test</title>
+		<link type="text/css" href="<?php echo(base_url("assets/css/redmond/jquery-ui-1.8.16.custom.css")) ?>" rel="Stylesheet" />	
 
 		<style type="text/css">
 

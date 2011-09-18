@@ -1,0 +1,128 @@
+#builder_container
+{
+	border: 4px solid #DDD;
+	width: 100%;
+}
+
+#builder_container > header {
+	background-color: #BCF;
+	padding: 5px;
+}
+
+#builder_container > section {
+	background-color: #FFF;
+	padding: 5px;
+	height: 500px;
+	overflow-y: scroll;
+	overflow-x: none;
+}
+
+/* Modules */
+.module {
+	padding: 10px;
+}
+
+.module input, .module textarea {
+	font-family: Arial, sans-serif;
+}
+
+.module:hover {
+	background-color: #ddd !important;
+}
+
+.module .delete_button {
+	position: relative;
+	top: 4px;
+	height: 20px;
+	margin-left: 8px;
+}
+
+.module.active {
+	background-color: #fbf9ee !important;
+}
+
+.module.active:hover {
+	background-color: #fbf9cc !important;
+}
+
+
+/* Category */
+.module.category {
+	margin-bottom: 10px;
+}
+
+.module.category input.title {
+	font-size: 24px;
+	font-weight: bold;
+	width: 100%;
+}
+
+.module.category textarea.description {
+	width: 100%;
+}
+
+/* Subcategory */
+.module.subcategory {
+	border-top: 4px solid #999;
+	background-color: #EEE;
+}
+.module.subcategory input, .module.subcategory textarea {
+	width: 70%
+}
+
+.module.subcategory input {
+	font-size: 16px;
+}
+
+/* Questions */
+.module.question table {
+	width: 75%;
+}
+
+.module.question th, .module.question.td {
+	vertical-align: top;
+	text-align: left;
+}
+
+.module.question input, .module.question textarea {
+	width: 100%;
+}
+
+.module.question th {
+	width: 100px;
+}
+
+.module.question .answers {
+	display: none;
+}
+
+.module.question.active .answers {
+	display: table-row;
+}
+
+.module.question .answer.correct input {
+	background-color: #e0f2be;
+	font-weight: bold;
+}
+
+.module.question .answer.ghost input{ background-color: #DFD7CF; }
+
+
+/* Builder Header */
+button {
+	font-size: 12px !important;
+}
+
+#builder_container > header button{
+	display: inline;
+}
+
+/* Templates */
+#module_templates {
+	display: none;
+}
+
+/* Misc */ 
+.hide { display: none; }
+.left {	float: left; }
+.right { float: right; }

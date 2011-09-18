@@ -19,13 +19,13 @@ class Exam_model extends CI_Model {
 		return $query->result();
 	}
 
-	function get_exam($id) {
-		$query = $this->db->get_where('exams', array('id' => $id));
+	function get_exam($exam_id) {
+		$query = $this->db->get_where('exams', array('exam_id' => $id));
 		return $query->result();
 	}
 
-	function update_exam($id, $data) {
-		$this->db->where('id', $id);
+	function update_exam($exam_id, $data) {
+		$this->db->where('exam_id', $id);
 		$result = $this->db->update('exams', $data);
 		return $result;
 	}
@@ -35,13 +35,14 @@ class Exam_model extends CI_Model {
 	 * Categories
 	 * 
 	 */
+
 	function get_categories($exam_id) {
 		$query = $this->db->get_where('categories', array('exam_id' => $exam_id));
 		return $query->result();
 	}
 
-	function update_category($id, $data) {
-		$this->db->where('id', $id);
+	function update_category($category_id, $data) {
+		$this->db->where('category_id', $id);
 		$result = $this->db->update('categories', $data);
 		return $result;
 	}
@@ -52,21 +53,66 @@ class Exam_model extends CI_Model {
 		return $result;
 	}
 
-	function delete_category($id, $data) {
+	function delete_category($id) {
 		$this->db->where('id', $id);
-		$result = $this->db->delete('categories', $data);
+		$result = $this->db->delete('categories');
 		return $result;
 	}
 
 	/*
-	 * 
-	 * Questions 
-	 * 
+	 * Subcategories
 	 */
-	function get_questions($exam_id) {
-		$query = $this->db->get_where('questions', array('exam_id' => $exam_id));
+
+	function get_subcategories($exam_id, $category_id) {
+		$query = $this->db->get_where('subcategories', array(
+			'exam_id' => $exam_id,
+			'category_id' => $category_id)
+		);
 		return $query->result();
 	}
+
+	function delete_subcategories($exam_id, $category_id) {
+		$this->db->where('exam_id', $exam_id);
+		$this->db->where('category_id', $category_id);
+		$result = $this->db->delete('subcategories');
+		return $result;
+	}
+
+	function add_subcategories($data) {
+		$this->db->insert_batch('subcategories', $data); /* cascade-deletes questions and answers */
+	}
+
+	/*
+	 * Questions  
+	 */
+
+	function get_questions($exam_id, $category_id) {
+		$query = $this->db->get_where('questions', array(
+			'exam_id' => $exam_id,
+			'category_id' => $category_id)
+		);
+		return $query->result();
+	}
+
+	function add_questions($data) {
+		$this->db->insert_batch('questions', $data); /* cascade-deletes questions and answers */
+	}
+
+	/*
+	 * Answers
+	 */
+	function get_answers($exam_id, $category_id) {
+		$query = $this->db->get_where('answers', array(
+			'exam_id' => $exam_id,
+			'category_id' => $category_id)
+		);
+		return $query->result();
+	}
+	
+	function add_answers($data) {
+		$this->db->insert_batch('answers', $data); /* cascade-deletes questions and answers */
+	}
+
 }
 
 /* End of file exam_model.php */
